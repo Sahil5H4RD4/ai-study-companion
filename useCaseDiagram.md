@@ -1,5 +1,8 @@
 # AI Study Companion - Use Case Diagram
 
+![Use Case Diagram](assets/combined_diagrams.png)
+
+
 ```mermaid
 useCaseDiagram
     actor Student as "Student"

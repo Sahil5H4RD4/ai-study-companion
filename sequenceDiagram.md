@@ -1,4 +1,7 @@
 # AI Study Companion - Sequence Diagram
+
+![Sequence Diagram](assets/sequence_diagram.png)
+
 ## Feature: Upload Note & Generate Summary
 
 ```mermaid

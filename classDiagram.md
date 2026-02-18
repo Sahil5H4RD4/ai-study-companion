@@ -1,5 +1,8 @@
 # AI Study Companion - Class Diagram
 
+![Class Diagram](assets/class_diagram.png)
+
+
 ```mermaid
 classDiagram
     class User {

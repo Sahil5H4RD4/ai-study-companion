@@ -1,5 +1,8 @@
 # AI Study Companion - Entity Relationship Diagram
 
+![ER Diagram](assets/er_diagram.png)
+
+
 ```mermaid
 erDiagram
     USERS {
