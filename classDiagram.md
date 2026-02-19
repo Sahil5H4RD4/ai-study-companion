@@ -1,5 +1,14 @@
 # AI Study Companion - Class Diagram
 
+The **Class Diagram** represents the static structure of the system, defining the objects, their attributes, methods, and relationships. It serves as a blueprint for the backend implementation.
+
+### 🏗️ Core Classes
+- **User**: Base class for all users, handling authentication and profile data.
+- **Student**: Inherits from `User`; adds specific study-related methods like `uploadNote()` and `takeQuiz()`.
+- **Note**: Represents uploaded study material.
+- **Quiz & Question**: Manages assessments and individual MCQs.
+- **AIService**: Interface defining the contract for AI operations (summarization, generation).
+
 ![Class Diagram](assets/class_diagram.png)
 
 

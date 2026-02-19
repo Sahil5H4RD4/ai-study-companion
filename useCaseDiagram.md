@@ -1,5 +1,15 @@
 # AI Study Companion - Use Case Diagram
 
+The **Use Case Diagram** illustrates the interactions between the **Student** and the **AI Study Companion System**. It highlights the core functionalities available to the user and the backend AI services that support them.
+
+### 🎭 Actors
+- **Student**: The primary user who interacts with the system to study, take quizzes, and track progress.
+- **AI Service**: An external or internal component responsible for generating intelligence-based content (summaries, quizzes, plans).
+
+### 🔑 Key Use Cases
+- **User Actions**: Sign up/login, manage profile, upload materials, view analytics.
+- **AI Interactions**: Generate summaries, create quizzes, and formulate study plans.
+
 ![Use Case Diagram](assets/combined_diagrams.png)
 
 

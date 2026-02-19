@@ -1,5 +1,11 @@
 # AI Study Companion - Sequence Diagram
 
+The **Sequence Diagram** details the step-by-step flow of operations for key features, showing how the Frontend, Backend, Database, and AI Service interact over time.
+
+### 🔄 Key Workflows
+1.  **Upload & Summary**: How a student uploads a note and receives an AI-generated summary.
+2.  **Quiz Generation & Attempt**: The process of creating a quiz from notes, taking it, and submitting answers for scoring.
+
 ![Sequence Diagram](assets/sequence_diagram.png)
 
 ## Feature: Upload Note & Generate Summary
