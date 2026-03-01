@@ -32,6 +32,14 @@ classDiagram
         +viewAnalytics()
     }
 
+    class Admin {
+        -String adminId
+        -List~String~ permissions
+        +manageUsers()
+        +manageContent()
+        +viewSystemLogs()
+    }
+
     class Note {
         -String id
         -String title
@@ -87,6 +95,7 @@ classDiagram
     }
 
     User <|-- Student
+    User <|-- Admin
     Student "1" *-- "many" Note : uploads
     Student "1" *-- "many" Result : has
     Student "1" *-- "1" StudyPlan : has
