@@ -40,12 +40,17 @@ classDiagram
         +viewSystemLogs()
     }
 
+    class Tag {
+        -String id
+        -String name
+    }
+
     class Note {
         -String id
         -String title
         -String content
         -String fileUrl
-        -List~String~ tags
+        -List~Tag~ tags
         -DateTime createdAt
         +generateSummary()
     }
@@ -72,6 +77,14 @@ classDiagram
         -DateTime attemptedAt
     }
 
+    class Task {
+        -String id
+        -String title
+        -String description
+        -boolean isCompleted
+        -DateTime dueDate
+    }
+
     class StudyPlan {
         -String id
         -String studentId
@@ -85,6 +98,7 @@ classDiagram
         +generateSummary(String text) String
         +generateQuiz(String text) Quiz
         +generateStudyPlan(List~String~ topics, DateTime deadline) StudyPlan
+        +generateTags(String text) List~Tag~
     }
 
     class OpenAIService {
@@ -92,6 +106,7 @@ classDiagram
         +generateSummary(String text)
         +generateQuiz(String text)
         +generateStudyPlan(List~String~ topics, DateTime deadline)
+        +generateTags(String text)
     }
 
     User <|-- Student
@@ -102,4 +117,6 @@ classDiagram
     Note "1" --> "1" Quiz : generates
     Quiz "1" *-- "many" Question : contains
     AIService <|.. OpenAIService : implements
+    StudyPlan "1" *-- "many" Task : contains
+    Note "many" -- "many" Tag : has
 ```
