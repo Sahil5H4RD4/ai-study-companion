@@ -1,8 +1,9 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '../generated/prisma/client';
 import { generateStudyPlan } from '../services/ai.service';
 import { Response } from 'express';
 import { AuthRequest } from '../middlewares/auth.middleware';
 
+// @ts-ignore
 const prisma = new PrismaClient();
 
 export const createStudyPlan = async (req: AuthRequest, res: Response): Promise<any> => {

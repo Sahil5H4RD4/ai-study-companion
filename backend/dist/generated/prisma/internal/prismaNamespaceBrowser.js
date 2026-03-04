@@ -52,28 +52,28 @@ exports.QueryMode = exports.JsonNullValueFilter = exports.NullsOrder = exports.J
 const runtime = __importStar(require("@prisma/client/runtime/index-browser"));
 exports.Decimal = runtime.Decimal;
 exports.NullTypes = {
-    DbNull: runtime.NullTypes.DbNull,
-    JsonNull: runtime.NullTypes.JsonNull,
-    AnyNull: runtime.NullTypes.AnyNull,
+    DbNull: runtime.objectEnumValues.classes.DbNull,
+    JsonNull: runtime.objectEnumValues.classes.JsonNull,
+    AnyNull: runtime.objectEnumValues.classes.AnyNull,
 };
 /**
  * Helper for filtering JSON entries that have `null` on the database (empty on the db)
  *
  * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
  */
-exports.DbNull = runtime.DbNull;
+exports.DbNull = runtime.objectEnumValues.instances.DbNull;
 /**
  * Helper for filtering JSON entries that have JSON `null` values (not empty on the db)
  *
  * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
  */
-exports.JsonNull = runtime.JsonNull;
+exports.JsonNull = runtime.objectEnumValues.instances.JsonNull;
 /**
  * Helper for filtering JSON entries that are `Prisma.DbNull` or `Prisma.JsonNull`
  *
  * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
  */
-exports.AnyNull = runtime.AnyNull;
+exports.AnyNull = runtime.objectEnumValues.instances.AnyNull;
 exports.ModelName = {
     User: 'User',
     Note: 'Note',

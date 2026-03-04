@@ -47,6 +47,8 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Prisma = exports.PrismaClient = exports.$Enums = void 0;
+const process = __importStar(require("node:process"));
+const path = __importStar(require("node:path"));
 const $Class = __importStar(require("./internal/class"));
 const Prisma = __importStar(require("./internal/prismaNamespace"));
 exports.Prisma = Prisma;
@@ -58,13 +60,14 @@ __exportStar(require("./enums"), exports);
  * Type-safe database client for TypeScript
  * @example
  * ```
- * const prisma = new PrismaClient({
- *   adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL })
- * })
+ * const prisma = new PrismaClient()
  * // Fetch zero or more Users
  * const users = await prisma.user.findMany()
  * ```
  *
- * Read more in our [docs](https://pris.ly/d/client).
+ * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client).
  */
-exports.PrismaClient = $Class.getPrismaClientClass();
+exports.PrismaClient = $Class.getPrismaClientClass(__dirname);
+// file annotations for bundling tools to include these files
+path.join(__dirname, "libquery_engine-darwin-arm64.dylib.node");
+path.join(process.cwd(), "generated/prisma/libquery_engine-darwin-arm64.dylib.node");

@@ -1,8 +1,9 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '../generated/prisma/client';
 import { generateQuiz } from '../services/ai.service';
 import { Response } from 'express';
 import { AuthRequest } from '../middlewares/auth.middleware';
 
+// @ts-ignore
 const prisma = new PrismaClient();
 
 export const createQuiz = async (req: AuthRequest, res: Response): Promise<any> => {

@@ -49,7 +49,7 @@ var __importStar = (this && this.__importStar) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.defineExtension = exports.QueryMode = exports.JsonNullValueFilter = exports.NullsOrder = exports.JsonNullValueInput = exports.SortOrder = exports.TaskScalarFieldEnum = exports.StudyPlanScalarFieldEnum = exports.ResultScalarFieldEnum = exports.QuestionScalarFieldEnum = exports.QuizScalarFieldEnum = exports.TagScalarFieldEnum = exports.NoteScalarFieldEnum = exports.UserScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.prismaVersion = exports.getExtensionContext = exports.Decimal = exports.Sql = exports.raw = exports.join = exports.empty = exports.sql = exports.PrismaClientValidationError = exports.PrismaClientInitializationError = exports.PrismaClientRustPanicError = exports.PrismaClientUnknownRequestError = exports.PrismaClientKnownRequestError = void 0;
-const runtime = __importStar(require("@prisma/client/runtime/client"));
+const runtime = __importStar(require("@prisma/client/runtime/library"));
 /**
  * Prisma Errors
  */
@@ -72,36 +72,36 @@ exports.Sql = runtime.Sql;
 exports.Decimal = runtime.Decimal;
 exports.getExtensionContext = runtime.Extensions.getExtensionContext;
 /**
- * Prisma Client JS version: 7.4.2
- * Query Engine version: 94a226be1cf2967af2541cca5529f0f7ba866919
+ * Prisma Client JS version: 6.19.2
+ * Query Engine version: c2990dca591cba766e3b7ef5d9e8a84796e47ab7
  */
 exports.prismaVersion = {
-    client: "7.4.2",
-    engine: "94a226be1cf2967af2541cca5529f0f7ba866919"
+    client: "6.19.2",
+    engine: "c2990dca591cba766e3b7ef5d9e8a84796e47ab7"
 };
 exports.NullTypes = {
-    DbNull: runtime.NullTypes.DbNull,
-    JsonNull: runtime.NullTypes.JsonNull,
-    AnyNull: runtime.NullTypes.AnyNull,
+    DbNull: runtime.objectEnumValues.classes.DbNull,
+    JsonNull: runtime.objectEnumValues.classes.JsonNull,
+    AnyNull: runtime.objectEnumValues.classes.AnyNull,
 };
 /**
  * Helper for filtering JSON entries that have `null` on the database (empty on the db)
  *
  * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
  */
-exports.DbNull = runtime.DbNull;
+exports.DbNull = runtime.objectEnumValues.instances.DbNull;
 /**
  * Helper for filtering JSON entries that have JSON `null` values (not empty on the db)
  *
  * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
  */
-exports.JsonNull = runtime.JsonNull;
+exports.JsonNull = runtime.objectEnumValues.instances.JsonNull;
 /**
  * Helper for filtering JSON entries that are `Prisma.DbNull` or `Prisma.JsonNull`
  *
  * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
  */
-exports.AnyNull = runtime.AnyNull;
+exports.AnyNull = runtime.objectEnumValues.instances.AnyNull;
 exports.ModelName = {
     User: 'User',
     Note: 'Note',
