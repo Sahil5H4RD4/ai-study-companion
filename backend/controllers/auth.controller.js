@@ -34,4 +34,31 @@ const register = async (req, res) => {
     }
 };
 
-module.exports = { register };
+const login = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        // Check user exists
+        const user = await prisma.user.findUnique({ where: { email } });
+        if (!user) {
+            return res.status(400).json({ error: 'Invalid credentials' });
+        }
+
+        // Check password
+        const isMatch = await bcrypt.compare(password, user.passwordHash);
+        if (!isMatch) {
+            return res.status(400).json({ error: 'Invalid credentials' });
+        }
+
+        // Generate JWT
+        const payload = { userId: user.id, role: user.role };
+        const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1d' });
+
+        res.json({ token, user: { id: user.id, email: user.email, fullName: user.fullName, role: user.role } });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Server error' });
+    }
+};
+
+module.exports = { register, login };
