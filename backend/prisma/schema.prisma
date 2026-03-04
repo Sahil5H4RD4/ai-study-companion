@@ -29,6 +29,8 @@ model User {
   
   // Relationships
   notes        Note[]
+  quizzes      Quiz[]
+  results      Result[]
 }
 
 model Note {
@@ -43,6 +45,7 @@ model Note {
   userId    String
   user      User     @relation(fields: [userId], references: [id])
   tags      Tag[]
+  quizzes   Quiz[]
 }
 
 model Tag {
@@ -51,4 +54,42 @@ model Tag {
 
   // Relationships
   notes Note[]
+}
+
+model Quiz {
+  id        String   @id @default(uuid())
+  title     String
+  createdAt DateTime @default(now())
+
+  // Relationships
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  noteId    String?
+  note      Note?    @relation(fields: [noteId], references: [id])
+  questions Question[]
+  results   Result[]
+}
+
+model Question {
+  id                 String @id @default(uuid())
+  text               String
+  options            Json   // Array of strings
+  correctOptionIndex Int
+
+  // Relationships
+  quizId             String
+  quiz               Quiz   @relation(fields: [quizId], references: [id], onDelete: Cascade)
+}
+
+model Result {
+  id             String   @id @default(uuid())
+  score          Int
+  totalQuestions Int
+  attemptedAt    DateTime @default(now())
+
+  // Relationships
+  userId         String
+  user           User     @relation(fields: [userId], references: [id])
+  quizId         String
+  quiz           Quiz     @relation(fields: [quizId], references: [id])
 }
