@@ -11,4 +11,44 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  STUDENT
+  ADMIN
+}
+
+model User {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  passwordHash String
+  fullName     String
+  role         Role     @default(STUDENT)
+  createdAt    DateTime @default(now())
+  
+  // Relationships
+  notes        Note[]
+}
+
+model Note {
+  id        String   @id @default(uuid())
+  title     String
+  content   String?
+  fileUrl   String?
+  summary   String?
+  createdAt DateTime @default(now())
+
+  // Relationships
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  tags      Tag[]
+}
+
+model Tag {
+  id    String @id @default(uuid())
+  name  String @unique
+
+  // Relationships
+  notes Note[]
 }
