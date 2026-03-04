@@ -6,8 +6,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.login = exports.register = void 0;
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const client_1 = require("../generated/prisma/client");
-const prisma = new client_1.PrismaClient({});
+const client_1 = require("@prisma/client");
+const prisma = new client_1.PrismaClient();
 const register = async (req, res) => {
     try {
         const { email, password, fullName } = req.body;

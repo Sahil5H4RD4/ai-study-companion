@@ -1,11 +1,11 @@
-import { PrismaClient } from '../generated/prisma/client';
+import { PrismaClient } from '@prisma/client';
 import { generateSummary } from '../services/ai.service';
 import fs from 'fs';
 import readline from 'readline';
 import { Response } from 'express';
 import { AuthRequest } from '../middlewares/auth.middleware';
 
-const prisma = new PrismaClient({} as any);
+const prisma = new PrismaClient();
 
 export const uploadNote = async (req: AuthRequest, res: Response): Promise<any> => {
     try {

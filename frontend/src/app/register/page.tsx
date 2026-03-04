@@ -30,8 +30,8 @@ export default function Register() {
 
             // Proceed to login
             router.push("/login");
-        } catch (err: any) {
-            setError(err.message);
+        } catch (err) {
+            setError(err instanceof Error ? err.message : "An unknown error occurred");
         }
     };
 

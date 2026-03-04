@@ -1,9 +1,9 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import { PrismaClient } from '../generated/prisma/client';
+import { PrismaClient } from '@prisma/client';
 import { Request, Response } from 'express';
 
-const prisma = new PrismaClient({} as any);
+const prisma = new PrismaClient();
 
 export const register = async (req: Request, res: Response): Promise<any> => {
     try {

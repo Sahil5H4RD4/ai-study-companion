@@ -30,8 +30,8 @@ export default function Login() {
             // Save token (in a real app, use HttpOnly cookies or more secure storage)
             localStorage.setItem("token", data.token);
             router.push("/dashboard");
-        } catch (err: any) {
-            setError(err.message);
+        } catch (err) {
+            setError(err instanceof Error ? err.message : String(err));
         }
     };
 
@@ -66,7 +66,7 @@ export default function Login() {
                     </button>
                 </form>
                 <p className="mt-6 text-center text-gray-400 text-sm">
-                    Don't have an account? <Link href="/register" className="text-indigo-400 hover:underline">Sign up</Link>
+                    Don&apos;t have an account? <Link href="/register" className="text-indigo-400 hover:underline">Sign up</Link>
                 </p>
             </div>
         </div>
