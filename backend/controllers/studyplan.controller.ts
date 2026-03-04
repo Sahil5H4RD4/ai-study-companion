@@ -1,9 +1,11 @@
-const { PrismaClient } = require('@prisma/client');
-const { generateStudyPlan } = require('../services/ai.service');
+import { PrismaClient } from '../generated/prisma/client';
+import { generateStudyPlan } from '../services/ai.service';
+import { Response } from 'express';
+import { AuthRequest } from '../middlewares/auth.middleware';
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient({} as any);
 
-const createStudyPlan = async (req, res) => {
+export const createStudyPlan = async (req: AuthRequest, res: Response): Promise<any> => {
     try {
         const { topics, examDate } = req.body;
         const userId = req.user.userId;
@@ -21,7 +23,7 @@ const createStudyPlan = async (req, res) => {
                 userId,
                 examDate: new Date(examDate),
                 tasks: {
-                    create: generatedTasks.map(t => ({
+                    create: generatedTasks.map((t: any) => ({
                         title: t.title,
                         description: t.description,
                         dueDate: new Date(t.dueDate)
@@ -39,5 +41,3 @@ const createStudyPlan = async (req, res) => {
         res.status(500).json({ error: 'Server error during study plan generation' });
     }
 };
-
-module.exports = { createStudyPlan };

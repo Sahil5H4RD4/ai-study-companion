@@ -1,9 +1,11 @@
-const { PrismaClient } = require('@prisma/client');
-const { generateQuiz } = require('../services/ai.service');
+import { PrismaClient } from '../generated/prisma/client';
+import { generateQuiz } from '../services/ai.service';
+import { Response } from 'express';
+import { AuthRequest } from '../middlewares/auth.middleware';
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient({} as any);
 
-const createQuiz = async (req, res) => {
+export const createQuiz = async (req: AuthRequest, res: Response): Promise<any> => {
     try {
         const { noteId, title } = req.body;
         const userId = req.user.userId;
@@ -24,7 +26,7 @@ const createQuiz = async (req, res) => {
                 userId,
                 noteId,
                 questions: {
-                    create: generatedQuestions.map(q => ({
+                    create: generatedQuestions.map((q: any) => ({
                         text: q.text,
                         options: q.options,
                         correctOptionIndex: q.correctOptionIndex
@@ -42,5 +44,3 @@ const createQuiz = async (req, res) => {
         res.status(500).json({ error: 'Server error during quiz generation' });
     }
 };
-
-module.exports = { createQuiz };

@@ -1,11 +1,11 @@
-const { GoogleGenerativeAI } = require('@google/generative-ai');
+import { GoogleGenerativeAI } from '@google/generative-ai';
 
 // Warning: We are instantiating this without checking if the key is empty,
 // in a real environment it would fail here if OPENAI_API_KEY is not set.
 // We are re-using OPENAI_API_KEY name from the initial .env but using Gemini API
 const genAI = new GoogleGenerativeAI(process.env.OPENAI_API_KEY || 'dummy_key');
 
-const generateSummary = async (text) => {
+export const generateSummary = async (text: string) => {
     try {
         const model = genAI.getGenerativeModel({ model: 'gemini-1.5-pro' });
         const prompt = `Summarize the following educational text concisely:\n\n${text}`;
@@ -18,7 +18,7 @@ const generateSummary = async (text) => {
     }
 };
 
-const generateQuiz = async (text) => {
+export const generateQuiz = async (text: string) => {
     try {
         const model = genAI.getGenerativeModel({ model: 'gemini-1.5-pro' });
         const prompt = `Generate a 3-question multiple-choice quiz based on the following text. 
@@ -47,7 +47,7 @@ Text:\n${text}`;
     }
 };
 
-const generateStudyPlan = async (topics, targetDateISO) => {
+export const generateStudyPlan = async (topics: string[], targetDateISO: string) => {
     try {
         const model = genAI.getGenerativeModel({ model: 'gemini-1.5-pro' });
         const prompt = `Create a study plan for the following topics: ${topics.join(', ')}. 
@@ -74,9 +74,3 @@ Return ONLY a valid JSON array of tasks, where each task object has:
         throw new Error('AI Study Plan generation failed');
     }
 }
-
-module.exports = {
-    generateSummary,
-    generateQuiz,
-    generateStudyPlan
-};
