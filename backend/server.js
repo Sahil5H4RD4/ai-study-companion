@@ -9,6 +9,10 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
+// Routes
+const authRoutes = require('./routes/auth.route');
+app.use('/api/auth', authRoutes);
+
 // Basic Route for testing
 app.get('/', (req, res) => {
     res.json({ message: 'Welcome to the AI Study Companion API' });
