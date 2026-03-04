@@ -31,6 +31,7 @@ model User {
   notes        Note[]
   quizzes      Quiz[]
   results      Result[]
+  studyPlans   StudyPlan[]
 }
 
 model Note {
@@ -92,4 +93,27 @@ model Result {
   user           User     @relation(fields: [userId], references: [id])
   quizId         String
   quiz           Quiz     @relation(fields: [quizId], references: [id])
+}
+
+model StudyPlan {
+  id        String   @id @default(uuid())
+  examDate  DateTime
+  createdAt DateTime @default(now())
+
+  // Relationships
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  tasks     Task[]
+}
+
+model Task {
+  id          String   @id @default(uuid())
+  title       String
+  description String?
+  isCompleted Boolean  @default(false)
+  dueDate     DateTime
+
+  // Relationships
+  studyPlanId String
+  studyPlan   StudyPlan @relation(fields: [studyPlanId], references: [id], onDelete: Cascade)
 }
