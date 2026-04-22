@@ -1,7 +1,7 @@
 # 🎓 AI Study Companion
 
 <p align="center">
-  <a href="https://Sahil5H4RD4.github.io/ai-study-companion"><img src="https://img.shields.io/badge/Live-Deployment-success?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Deployment"></a>
+  <a href="https://ai-study-companion-beige.vercel.app"><img src="https://img.shields.io/badge/Live-Deployment-success?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Deployment"></a>
   <img src="https://img.shields.io/badge/Backend-Node.js%20%7C%20Express-339933?style=for-the-badge&logo=node.js&logoColor=white" alt="Backend">
   <img src="https://img.shields.io/badge/Frontend-React%20%7C%20Next.js-61DAFB?style=for-the-badge&logo=react&logoColor=black" alt="Frontend">
   <img src="https://img.shields.io/badge/AI-Groq%20%7C%20Llama%203-f55036?style=for-the-badge&logo=ai&logoColor=white" alt="AI">
@@ -10,8 +10,8 @@
 
 > An intelligent, full-stack learning assistant that helps students organize study materials, generate AI-powered summaries & quizzes, and chat with a virtual tutor.
 
-### 🚀 **[Access the Live Deployed Application Here!](https://Sahil5H4RD4.github.io/ai-study-companion)** 🚀
-*(Note: To fully utilize the AI generation features on the live site, ensure your local backend API is running on `localhost:5000`)*
+### 🚀 **[Access the Live Deployed Application Here!](https://ai-study-companion-beige.vercel.app)** 🚀
+
 
 ---
 
@@ -27,9 +27,10 @@
 
 ## 🏗️ Tech Stack
 
-**Backend** — Node.js / Express · Prisma ORM · SQLite · Groq SDK (llama-3.3-70b-versatile)  
-**Frontend** — React / Next.js · Tailwind CSS · "Stitch" Custom UI  
-**DevOps** — GitHub Actions CI/CD (GitHub Pages)
+**Backend** — Node.js / Express · Prisma ORM · SQLite · Groq SDK (llama-3.3-70b-versatile) · **Deployed on Render**  
+**Frontend** — React / Next.js · Tailwind CSS · "Stitch" Custom UI · **Deployed on Vercel**  
+**DevOps** — Automated CI/CD via GitHub Integrations
+
 
 ## 🏛️ Architecture Overview
 
