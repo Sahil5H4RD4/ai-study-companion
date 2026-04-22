@@ -47,20 +47,20 @@ To build a **Full Stack AI-powered study assistant** that:
 - **Adaptive Planning**: AI adjusts the plan based on your progress.
 - **Daily Tasks**: Breakdown of study goals into manageable daily tasks.
 
-## 🏗️ Tech Stack (Suggested)
+## 🏗️ Tech Stack
 
-### Backend (Main Focus - 75%)
-- **Runtime**: Node.js / Express OR Spring Boot
-- **Auth**: JWT Authentication
-- **API**: RESTful API design
-- **Database**: PostgreSQL / MongoDB
-- **AI Integration**: OpenAI API / Gemini API
-- **Architecture**: Layered / Clean Architecture
+### Backend
+- **Runtime**: Node.js / Express
+- **ORM**: Prisma
+- **Database**: SQLite (Production on Render)
+- **AI Integration**: Groq SDK (Llama 3.3-70b-versatile)
+- **Deployment**: Render
 
-### Frontend (25%)
+### Frontend
 - **Framework**: React / Next.js
-- **Styling**: Tailwind CSS / Material UI
-- **Visualization**: Chart.js / Recharts for analytics
+- **Styling**: Vanilla CSS (Stitch Theme)
+- **Deployment**: Vercel
+
 
 ## 🧠 Backend Architecture
 The project follows **Clean Architecture** principles to ensure scalability and maintainability:
@@ -79,8 +79,13 @@ The project follows **Clean Architecture** principles to ensure scalability and 
 - **Polymorphism**: Multiple implementations for the `AIService` interface.
 
 ## 📌 Why This Project Stands Out
-- **AI-First Approach**: Leverages modern AI for content generation.
-- **Robust Architecture**: Built with industry-standard design patterns.
-- **Comprehensive Analytics**: Goes beyond simple storage to provide actionable insights.
-- **Secure & Scalable**: Implements proper authentication and database design.
+- **AI-First Approach**: Leverages ultra-fast Groq AI for content generation.
+- **Robust Architecture**: Built with industry-standard design patterns and Prisma ORM.
+- **Sleek UX**: Custom glassmorphic "Stitch" design system for a premium feel.
+- **Cloud Native**: Fully deployed on Vercel and Render with automated CI/CD.
+
+### 🌐 Live Links
+- **Application**: [https://ai-study-companion-beige.vercel.app](https://ai-study-companion-beige.vercel.app)
+- **Backend API**: [https://ai-study-companion-xp0u.onrender.com](https://ai-study-companion-xp0u.onrender.com)
+
 
