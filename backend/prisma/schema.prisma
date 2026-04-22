@@ -1,9 +1,6 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client"
   output   = "../generated/prisma"
@@ -42,9 +39,9 @@ model Note {
   summary   String?
   createdAt DateTime @default(now())
 
-  // Relationships
-  userId    String
-  user      User     @relation(fields: [userId], references: [id])
+  // Relationships - userId optional for guest/public usage
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id])
   tags      Tag[]
   quizzes   Quiz[]
 }
@@ -62,9 +59,9 @@ model Quiz {
   title     String
   createdAt DateTime @default(now())
 
-  // Relationships
-  userId    String
-  user      User     @relation(fields: [userId], references: [id])
+  // Relationships - userId optional for guest/public usage
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id])
   noteId    String?
   note      Note?    @relation(fields: [noteId], references: [id])
   questions Question[]
@@ -100,9 +97,9 @@ model StudyPlan {
   examDate  DateTime
   createdAt DateTime @default(now())
 
-  // Relationships
-  userId    String
-  user      User     @relation(fields: [userId], references: [id])
+  // Relationships - userId optional for guest/public usage
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id])
   tasks     Task[]
 }
 

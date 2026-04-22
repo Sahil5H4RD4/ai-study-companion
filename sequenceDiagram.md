@@ -4,8 +4,9 @@ The **Sequence Diagram** details the step-by-step flow of operations for key fea
 
 ### 🔄 Key Workflows
 1.  **Upload & Summary**: How a student uploads a note and receives an AI-generated summary.
-2.  **Quiz Generation & Attempt**: The process of creating a quiz from notes, taking it, and submitting answers for scoring.
+2.  **Quiz Generation**: The process of creating a quiz from notes, taking it, and receiving scores.
 3.  **Generate Smart Study Plan**: How a student requests a study plan and AI generates daily tasks based on topics and deadlines.
+4.  **AI Chat Tutor**: How a student asks questions and the backend handles conversation history with Groq.
 
 ![Sequence Diagram](assets/sequence_diagram.png)
 
@@ -15,18 +16,18 @@ The **Sequence Diagram** details the step-by-step flow of operations for key fea
 sequenceDiagram
     autonumber
     actor S as Student
-    participant FE as Frontend (React/Next.js)
-    participant API as Backend API (Node/Spring)
-    participant DB as Database
-    participant AI as AI Service (OpenAI)
+    participant FE as Frontend (Next.js)
+    participant API as Backend (Express)
+    participant DB as Database (SQLite)
+    participant AI as AI Service (Groq)
 
-    S->>FE: Upload Study Material (PDF/Text)
+    S->>FE: Provide Study Material (Text)
     activate FE
-    FE->>API: POST /api/notes/upload (file, userId)
+    FE->>API: POST /api/notes/summarize-text (text, title)
     activate API
     
-    API->>API: Validate File & User
-    API->>AI: Request Summary Generation (fileContent)
+    API->>API: Validate Text
+    API->>AI: Request Summary Generation (text)
     activate AI
     AI-->>API: Returning Summary Text
     deactivate AI
@@ -36,37 +37,32 @@ sequenceDiagram
     DB-->>API: Confirmation
     deactivate DB
 
-    API-->>FE: Return Success Response (noteId, summary)
+    API-->>FE: Return Success Response (note, summary)
     deactivate API
     
     FE-->>S: Display Success & Summary
     deactivate FE
 ```
 
-## Feature: Generate & Take Quiz
+## Feature: Generate Quick Quiz
 
 ```mermaid
 sequenceDiagram
     autonumber
     actor S as Student
     participant FE as Frontend
-    participant API as Backend API
+    participant API as Backend
     participant AI as AI Service
     participant DB as Database
 
-    S->>FE: Request Quiz (noteId)
+    S->>FE: Request Quiz from Text
     activate FE
-    FE->>API: POST /api/quiz/generate (noteId)
+    FE->>API: POST /api/quiz/generate-from-text (text)
     activate API
-
-    API->>DB: Fetch Note Content
-    activate DB
-    DB-->>API: content
-    deactivate DB
 
     API->>AI: Generate MCQs from Content
     activate AI
-    AI-->>API: List of Questions & Answers
+    AI-->>API: List of Questions & Answers (JSON)
     deactivate AI
 
     API->>DB: Save Quiz & Questions
@@ -76,21 +72,7 @@ sequenceDiagram
 
     API-->>FE: Return Quiz Data
     deactivate API
-    FE-->>S: Display Quiz Interface
-
-    S->>FE: Submit Answers
-    FE->>API: POST /api/quiz/submit (quizId, answers)
-    activate API
-    
-    API->>API: Calculate Score
-    API->>DB: Save User Progress/Result
-    activate DB
-    DB-->>API: Success
-    deactivate DB
-
-    API-->>FE: Return Score & Feedback
-    deactivate API
-    FE-->>S: Show Results
+    FE-->>S: Display Interactive Quiz
     deactivate FE
 ```
 
@@ -101,18 +83,18 @@ sequenceDiagram
     autonumber
     actor S as Student
     participant FE as Frontend
-    participant API as Backend API
+    participant API as Backend
     participant AI as AI Service
     participant DB as Database
 
     S->>FE: Request Study Plan (topics, examDate)
     activate FE
-    FE->>API: POST /api/studyplan/generate (topics, examDate)
+    FE->>API: POST /api/studyplan/generate-public (topics, examDate)
     activate API
 
     API->>AI: Generate Plan (topics, examDate)
     activate AI
-    AI-->>API: List of Daily Tasks
+    AI-->>API: List of Daily Tasks (JSON)
     deactivate AI
 
     API->>DB: Save Study Plan & Tasks
@@ -123,5 +105,32 @@ sequenceDiagram
     API-->>FE: Return Study Plan Data
     deactivate API
     FE-->>S: Display Study Calendar/Tasks
+    deactivate FE
+```
+
+## Feature: AI Chat Tutor
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor S as Student
+    participant FE as Frontend
+    participant API as Backend
+    participant AI as AI Service (Groq)
+
+    S->>FE: Send Message in Chat
+    activate FE
+    FE->>API: POST /api/chat (message, history)
+    activate API
+
+    API->>API: Validate/Sanitize History
+    API->>AI: generateChatResponse(message, history)
+    activate AI
+    AI-->>API: Returning AI Tutor Reply
+    deactivate AI
+
+    API-->>FE: Return { reply }
+    deactivate API
+    FE-->>S: Append Assistant Bubble to Chat
     deactivate FE
 ```

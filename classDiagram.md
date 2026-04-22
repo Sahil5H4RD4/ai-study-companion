@@ -1,122 +1,111 @@
 # AI Study Companion - Class Diagram
 
-The **Class Diagram** represents the static structure of the system, defining the objects, their attributes, methods, and relationships. It serves as a blueprint for the backend implementation.
+The **Class Diagram** represents the static structure of the system, defining the objects, their attributes, methods, and relationships. It serves as a blueprint for the backend implementation and demonstrates strict adherence to Object-Oriented Programming (OOP) principles.
 
-### 🏗️ Core Classes
-- **User**: Base class for all users, handling authentication and profile data.
-- **Student**: Inherits from `User`; adds specific study-related methods like `uploadNote()` and `takeQuiz()`.
-- **Note**: Represents uploaded study material.
-- **Quiz & Question**: Manages assessments and individual MCQs.
-- **AIService**: Interface defining the contract for AI operations (summarization, generation).
+### 🏗️ Core Architecture & OOP Principles
+- **Encapsulation**: Services (`NoteService`, `QuizService`, `StudyPlanService`) encapsulate database logic and business rules.
+- **Single Responsibility Principle**: `ChatController` handles chat interactions, while `AIService` acts as a facade for Groq LLM integration.
+- **Data Models**: `User`, `Note`, `Quiz`, `Question`, and `StudyPlan` represent Prisma ORM models with relational mapping.
 
 ![Class Diagram](assets/class_diagram.png)
-
 
 ```mermaid
 classDiagram
     class User {
-        -String id
-        -String email
-        -String password
-        -String name
-        +login()
-        +signup()
-        +updateProfile()
-    }
-
-    class Student {
-        -String studentId
-        -List~String~ subjects
-        +uploadNote()
-        +takeQuiz()
-        +viewAnalytics()
-    }
-
-    class Admin {
-        -String adminId
-        -List~String~ permissions
-        +manageUsers()
-        +manageContent()
-        +viewSystemLogs()
-    }
-
-    class Tag {
-        -String id
-        -String name
+        +String id
+        +String email
+        +String passwordHash
+        +String fullName
+        +Role role
+        +DateTime createdAt
     }
 
     class Note {
-        -String id
-        -String title
-        -String content
-        -String fileUrl
-        -List~Tag~ tags
-        -DateTime createdAt
-        +generateSummary()
+        +String id
+        +String title
+        +String content
+        +String summary
+        +String userId
+        +DateTime createdAt
     }
 
     class Quiz {
-        -String id
-        -String title
-        -List~Question~ questions
-        -DateTime createdAt
+        +String id
+        +String title
+        +String userId
+        +String noteId
+        +DateTime createdAt
     }
 
     class Question {
-        -String id
-        -String text
-        -List~String~ options
-        -int correctOptionIndex
-    }
-
-    class Result {
-        -String id
-        -String studentId
-        -String quizId
-        -int score
-        -DateTime attemptedAt
-    }
-
-    class Task {
-        -String id
-        -String title
-        -String description
-        -boolean isCompleted
-        -DateTime dueDate
+        +String id
+        +String text
+        +Json options
+        +int correctOptionIndex
+        +String quizId
     }
 
     class StudyPlan {
-        -String id
-        -String studentId
-        -DateTime examDate
-        -List~Task~ tasks
-        +generatePlan()
+        +String id
+        +DateTime examDate
+        +String userId
+        +DateTime createdAt
+    }
+
+    class Task {
+        +String id
+        +String title
+        +String description
+        +boolean isCompleted
+        +DateTime dueDate
+        +String studyPlanId
+    }
+
+    class NoteService {
+        +createNote(data: Object) Promise~Note~
+        +getAllNotes() Promise~List~Note~~
+        +updateNoteSummary(id: String, summary: String) Promise~Note~
+    }
+
+    class QuizService {
+        +createQuiz(data: Object) Promise~Quiz~
+        +getAllQuizzes() Promise~List~Quiz~~
+    }
+
+    class StudyPlanService {
+        +createPlan(data: Object) Promise~StudyPlan~
+        +getAllPlans() Promise~List~StudyPlan~~
+        +updateTaskCompletion(taskId: String, isCompleted: boolean) Promise~Task~
+    }
+
+    class ChatController {
+        +chat(req: Request, res: Response) Promise~void~
     }
 
     class AIService {
-        <<interface>>
-        +generateSummary(String text) String
-        +generateQuiz(String text) Quiz
-        +generateStudyPlan(List~String~ topics, DateTime deadline) StudyPlan
-        +generateTags(String text) List~Tag~
+        <<facade>>
+        +generateSummary(text: String) Promise~String~
+        +generateQuiz(text: String) Promise~List~Object~~
+        +generateStudyPlan(topics: List~String~, targetDateISO: String) Promise~List~Object~~
+        +generateChatResponse(message: String, history: List~Object~) Promise~String~
     }
 
-    class OpenAIService {
-        -String apiKey
-        +generateSummary(String text)
-        +generateQuiz(String text)
-        +generateStudyPlan(List~String~ topics, DateTime deadline)
-        +generateTags(String text)
-    }
-
-    User <|-- Student
-    User <|-- Admin
-    Student "1" *-- "many" Note : uploads
-    Student "1" *-- "many" Result : has
-    Student "1" *-- "1" StudyPlan : has
-    Note "1" --> "1" Quiz : generates
+    %% Relationships
+    User "1" *-- "many" Note : owns
+    User "1" *-- "many" Quiz : takes
+    User "1" *-- "many" StudyPlan : has
+    
+    Note "1" --> "1" Quiz : source for
     Quiz "1" *-- "many" Question : contains
-    AIService <|.. OpenAIService : implements
-    StudyPlan "1" *-- "many" Task : contains
-    Note "many" -- "many" Tag : has
+    StudyPlan "1" *-- "many" Task : includes
+
+    %% Dependency mapping
+    NoteService ..> Note : manages
+    QuizService ..> Quiz : manages
+    StudyPlanService ..> StudyPlan : manages
+    
+    NoteService ..> AIService : delegates summarization
+    QuizService ..> AIService : delegates generation
+    StudyPlanService ..> AIService : delegates planning
+    ChatController ..> AIService : delegates chatting
 ```

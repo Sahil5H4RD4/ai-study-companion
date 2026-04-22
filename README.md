@@ -1,14 +1,17 @@
 # 🎓 AI Study Companion
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Status-Design%20Phase-yellow?style=for-the-badge" alt="Status">
+  <a href="https://Sahil5H4RD4.github.io/ai-study-companion"><img src="https://img.shields.io/badge/Live-Deployment-success?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Deployment"></a>
   <img src="https://img.shields.io/badge/Backend-Node.js%20%7C%20Express-339933?style=for-the-badge&logo=node.js&logoColor=white" alt="Backend">
   <img src="https://img.shields.io/badge/Frontend-React%20%7C%20Next.js-61DAFB?style=for-the-badge&logo=react&logoColor=black" alt="Frontend">
-  <img src="https://img.shields.io/badge/AI-OpenAI%20%7C%20Gemini-412991?style=for-the-badge&logo=openai&logoColor=white" alt="AI">
-  <img src="https://img.shields.io/badge/Database-PostgreSQL%20%7C%20MongoDB-4169E1?style=for-the-badge&logo=postgresql&logoColor=white" alt="Database">
+  <img src="https://img.shields.io/badge/AI-Groq%20%7C%20Llama%203-f55036?style=for-the-badge&logo=ai&logoColor=white" alt="AI">
+  <img src="https://img.shields.io/badge/Database-SQLite%20%7C%20Prisma-003B57?style=for-the-badge&logo=sqlite&logoColor=white" alt="Database">
 </p>
 
-> An intelligent, full-stack learning assistant that helps students organize study materials, generate AI-powered summaries & quizzes, and track academic progress.
+> An intelligent, full-stack learning assistant that helps students organize study materials, generate AI-powered summaries & quizzes, and chat with a virtual tutor.
+
+### 🚀 **[Access the Live Deployed Application Here!](https://Sahil5H4RD4.github.io/ai-study-companion)** 🚀
+*(Note: To fully utilize the AI generation features on the live site, ensure your local backend API is running on `localhost:5000`)*
 
 ---
 
@@ -18,43 +21,31 @@
 |---------|-------------|
 | 📂 **Smart Notes** | Upload & organize notes with AI-powered summarization |
 | 🧠 **Quiz Generator** | Auto-generate MCQs from your study materials |
-| 📊 **Analytics** | Track performance and identify weak areas |
+| 🤖 **AI Chat Tutor** | Chat with a Llama 3.3 powered tutor for instant explanations |
 | ⏰ **Study Planner** | AI-driven revision schedules based on exam dates |
-| 🔐 **Secure Auth** | JWT-based authentication & user management |
+| 🎨 **Stitch Design** | Beautiful, accessible, neon-glassmorphic responsive UI |
 
 ## 🏗️ Tech Stack
 
-**Backend (75%)** — Node.js / Express · JWT · PostgreSQL / MongoDB · OpenAI / Gemini API  
-**Frontend (25%)** — React / Next.js · Tailwind CSS · Chart.js
+**Backend** — Node.js / Express · Prisma ORM · SQLite · Groq SDK (llama-3.3-70b-versatile)  
+**Frontend** — React / Next.js · Tailwind CSS · "Stitch" Custom UI  
+**DevOps** — GitHub Actions CI/CD (GitHub Pages)
 
 ## 🏛️ Architecture Overview
 
 ```
 ┌──────────────┐     ┌──────────────┐     ┌──────────────┐
 │   Frontend   │────▶│  Backend API │────▶│   Database   │
-│  React/Next  │◀────│ Node/Express │◀────│ PostgreSQL / │
-│              │     │              │     │   MongoDB    │
+│  React/Next  │◀────│ Node/Express │◀────│    SQLite    │
 └──────────────┘     └──────┬───────┘     └──────────────┘
                             │
                      ┌──────▼───────┐
                      │  AI Service  │
-                     │ OpenAI/Gemini│
+                     │  Groq Llama 3│
                      └──────────────┘
 ```
 
-## 📁 Project Structure
-
-```
-├── idea.md              # Detailed project idea & objectives
-├── useCaseDiagram.md    # Use case diagram (Mermaid)
-├── sequenceDiagram.md   # Sequence diagram (Mermaid)
-├── classDiagram.md      # Class diagram (Mermaid)
-├── ErDiagram.md         # ER diagram (Mermaid)
-├── CONTRIBUTING.md      # Contribution guidelines
-└── assets/              # Diagram images & media
-```
-
-## 📄 Documentation
+## 📄 Documentation (SESD Final Submission)
 
 - [**Project Idea**](idea.md) — Problem statement, objectives & feature breakdown
 - [**Use Case Diagram**](useCaseDiagram.md) — Actor-system interactions
@@ -62,38 +53,38 @@
 - [**Class Diagram**](classDiagram.md) — OOP structure & relationships
 - [**ER Diagram**](ErDiagram.md) — Database schema & entity relationships
 
-## 🗺️ Roadmap
+## 🗺️ Roadmap & Completion
 
 - [x] 📝 Define project idea & objectives
 - [x] 📐 Create UML diagrams (Use Case, Sequence, Class, ER)
 - [x] 📄 Complete documentation phase
-- [ ] ⚙️ Set up backend project structure (Node.js / Express)
-- [ ] 🗄️ Design & implement database schema
-- [ ] 🔐 Implement JWT authentication
-- [ ] 🤖 Integrate AI services (OpenAI / Gemini)
-- [ ] 📚 Build note upload & summarization API
-- [ ] 📝 Build quiz generation & evaluation API
-- [ ] 📊 Build analytics & study planner APIs
-- [ ] 🎨 Develop frontend UI (React / Next.js)
-- [ ] 🧪 Write tests & finalize deployment
+- [x] ⚙️ Set up backend project structure & OOP Architecture
+- [x] 🗄️ Design & implement database schema (Prisma/SQLite)
+- [x] 🤖 Integrate AI services (Migrated to Groq Llama 3 for latency)
+- [x] 📚 Build note upload & summarization API
+- [x] 📝 Build quiz generation API
+- [x] 📊 Build AI chat tutor & study planner APIs
+- [x] 🎨 Develop frontend UI (Next.js with custom Stitch theme)
+- [x] 🧪 Finalize SESD deployment
 
-## 🚀 Getting Started
-
-> 🔧 *Implementation coming soon — currently in the design & documentation phase.*
+## 🚀 Getting Started Locally
 
 ```bash
 # Clone the repository
 git clone https://github.com/Sahil5H4RD4/ai-study-companion.git
 cd ai-study-companion
 
-# Backend setup (coming soon)
+# 1. Setup Backend
+cd backend
 npm install
-npm run dev
+npx prisma db push
+npm run dev # Runs on port 5000
+
+# 2. Setup Frontend
+cd ../frontend
+npm install
+npm run dev # Runs on port 3000
 ```
-
-## 🤝 Contributing
-
-Contributions are welcome! Please read the [Contributing Guide](CONTRIBUTING.md) for details on our code of conduct, development workflow, and how to submit pull requests.
 
 ## 📝 License
 
