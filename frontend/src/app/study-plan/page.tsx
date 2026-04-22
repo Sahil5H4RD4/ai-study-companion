@@ -41,7 +41,7 @@ export default function StudyPlanPage() {
     setLoading(true);
 
     try {
-      const res = await fetch('http://localhost:5000/api/studyplan/generate-public', {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/studyplan/generate-public`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ topics, examDate: ed.toISOString() }),
@@ -62,7 +62,7 @@ export default function StudyPlanPage() {
     const newVal = !task.isCompleted;
     setTasks(prev => prev.map(t => t.id === taskId ? { ...t, isCompleted: newVal } : t));
     try {
-      await fetch(`http://localhost:5000/api/studyplan/task/${taskId}`, {
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/studyplan/task/${taskId}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ isCompleted: newVal }),

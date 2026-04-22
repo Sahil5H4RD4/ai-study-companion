@@ -29,9 +29,9 @@ export default function DashboardPage() {
     async function fetchStats() {
       try {
         const [n, q, p] = await Promise.all([
-          fetch('http://localhost:5000/api/notes').then(r => r.json()),
-          fetch('http://localhost:5000/api/quiz').then(r => r.json()),
-          fetch('http://localhost:5000/api/studyplan').then(r => r.json()),
+          fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/notes`).then(r => r.json()),
+          fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/quiz`).then(r => r.json()),
+          fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/studyplan`).then(r => r.json()),
         ]);
         setStats({
           notes: n.notes?.length ?? 0,

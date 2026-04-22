@@ -42,7 +42,7 @@ export default function ChatPage() {
 
     try {
       const history = messages.slice(-8).map(m => ({ role: m.role, content: m.content }));
-      const res = await fetch('http://localhost:5000/api/chat', {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: msgText, history }),

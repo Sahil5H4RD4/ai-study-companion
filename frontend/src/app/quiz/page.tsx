@@ -31,7 +31,7 @@ export default function QuizPage() {
     setLoading(true);
 
     try {
-      const res = await fetch('http://localhost:5000/api/quiz/generate-from-text', {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/quiz/generate-from-text`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ text, title: title || 'Quick Quiz' }),
